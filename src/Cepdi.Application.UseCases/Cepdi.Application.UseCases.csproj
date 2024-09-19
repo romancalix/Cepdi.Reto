@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\Medicamentos\" />
+    <Folder Include="UseCases\Medicamentos\Commands\DeleteCommand\" />
+    <Folder Include="UseCases\Medicamentos\Commands\UpdateCommand\" />
+    <Folder Include="UseCases\Medicamentos\Queries\" />
     <Folder Include="UseCases\Usuarios\Queries\" />
   </ItemGroup>
 

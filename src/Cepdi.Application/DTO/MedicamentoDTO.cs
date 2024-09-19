@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cepdi.Domain.Entities
+namespace Cepdi.Application.DTO
 {
-    public class Medicamentos
+    public class MedicamentoDTO
     {
         public int IDMEDICAMENTO { get; set; }
         public string? CONCENTRACION { get; set; }

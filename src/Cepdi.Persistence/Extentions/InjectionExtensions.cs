@@ -11,6 +11,7 @@ namespace Cepdi.Persistence.Extentions
         {
             services.AddSingleton<ApplicationDbContext>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IMedicamentoRepository, MedicamentoRepository>();
             return services;
         }
     }

@@ -4,24 +4,24 @@ using Cepdi.Application.UseCases.Commons.Base;
 using MediatR;
 using ENTITIES = Cepdi.Domain.Entities;
 
-namespace Cepdi.Application.UseCases.UseCases.Usuarios.Commands.CreateCommand
+namespace Cepdi.Application.UseCases.UseCases.Medicamentos.Commands.CreateCommand
 {
-    public class CreateUsuarioHandler : IRequestHandler<CreateUsuarioCommand, BaseResponse<bool>>
+    public class CreateMedicamentoHandler : IRequestHandler<CreateMedicamentoCommand, BaseResponse<bool>>
     {
-        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IMedicamentoRepository _medicamentoRepository;
         private readonly IMapper _mapper;
 
-        public CreateUsuarioHandler(
-            IUsuarioRepository usuarioRepository,
+        public CreateMedicamentoHandler(
+             IMedicamentoRepository repository,
             IMapper mapper
-         )
+        )
         {
-            this._usuarioRepository = usuarioRepository;
+            this._medicamentoRepository = repository;
             this._mapper = mapper;
         }
-        public async Task<BaseResponse<bool>> Handle(CreateUsuarioCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<bool>> Handle(CreateMedicamentoCommand request, CancellationToken cancellationToken)
         {
-            var validator = new CreateUsuarioValidation();
+            var validator = new CreateMedicamentoValidation();
             var validationResults = await validator.ValidateAsync(request, cancellationToken);
             var response = new BaseResponse<bool>();
 
@@ -32,9 +32,10 @@ namespace Cepdi.Application.UseCases.UseCases.Usuarios.Commands.CreateCommand
 
                 response.Errors = validationResults
                     .Errors
-                    .Select(x => new BaseError() { 
-                        errorMessage = x.ErrorMessage, 
-                        propertyName = x.PropertyName 
+                    .Select(x => new BaseError()
+                    {
+                        errorMessage = x.ErrorMessage,
+                        propertyName = x.PropertyName
                     });
 
                 return response;
@@ -42,13 +43,13 @@ namespace Cepdi.Application.UseCases.UseCases.Usuarios.Commands.CreateCommand
 
             try
             {
-                var usuario = this._mapper.Map<ENTITIES.Usuarios>(request);
-                response.Data = await this._usuarioRepository.AddUsuarioAsync(usuario);
+                var medicamento = this._mapper.Map<ENTITIES.Medicamentos>(request);
+                response.Data = await this._medicamentoRepository.AddMedicamentoAsync(medicamento);
 
                 if (response.Data)
                 {
                     response.IsSuccess = true;
-                    response.Message = "Usuario agregado con éxito.";
+                    response.Message = "Medicamento agregado con éxito.";
                 }
             }
             catch (Exception e)
