@@ -77,7 +77,7 @@ namespace Cepdi.Persistence.Repositories
             parameters.Add("nombre", data.NOMBRE);
             parameters.Add("usuario", data.USUARIO);
             parameters.Add("psw", data.PASSWORD);
-            //parameters.Add("status", data.ESTATUS);
+            parameters.Add("status", data.ESTATUS);
             parameters.Add("acciones", data.ACCIONES);
 
             using (var conn = this._context.CreateConnection)

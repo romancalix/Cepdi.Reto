@@ -1,4 +1,5 @@
 ﻿using Cepdi.Application.UseCases.UseCases.Usuarios.Commands.CreateCommand;
+using Cepdi.Application.UseCases.UseCases.Usuarios.Commands.DeleteCommand;
 using Cepdi.Application.UseCases.UseCases.Usuarios.Commands.UpdateCommand;
 using Cepdi.Application.UseCases.UseCases.Usuarios.Queries.GetAllQuery;
 using Cepdi.Application.UseCases.UseCases.Usuarios.Queries.GetById;
@@ -21,22 +22,16 @@ namespace Cepdi.API.Controllers
         [HttpPost("agregar")]
         public async Task<IActionResult> AgregarUsuario([FromBody] CreateUsuarioCommand createUsuarioCommand)
         {
-
             var response = await this._mediator.Send(createUsuarioCommand);
-
             return Ok(response);
-
         }
 
 
         [HttpPut("actualiazr")]
         public async Task<IActionResult> ActualizarUsuario([FromBody] UpdateUsuarioCommand updateUsuarioCommand)
         {
-
             var response = await this._mediator.Send(updateUsuarioCommand);
-
             return Ok(response);
-
         }
 
         [HttpGet("todos")]
@@ -55,13 +50,10 @@ namespace Cepdi.API.Controllers
         }
 
         [HttpDelete("eliminar")]
-        public async Task<IActionResult> EliminarUsuario([FromBody] UpdateUsuarioCommand updateUsuarioCommand)
+        public async Task<IActionResult> EliminarUsuario(int id)
         {
-
-            var response = await this._mediator.Send(updateUsuarioCommand);
-
+            var response = await this._mediator.Send(new DeleteUsuarioCommand() { id = id });
             return Ok(response);
-
         }
     }
 }
