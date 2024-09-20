@@ -38,15 +38,24 @@ namespace Cepdi.Persistence.Repositories
             return response > 0;
         }
 
-        public Task<IEnumerable<Medicamentos>> GetMedicamentoAsync()
+        public async Task<IEnumerable<Medicamentos>> GetMedicamentosAsync()
         {
-            throw new NotImplementedException();
+            IEnumerable<Medicamentos> response = null;
+            string qry = "spAObtenerMedicamentos";
+
+
+            using (var conn = this._context.CreateConnection)
+            {
+                response = await conn.QueryAsync<Medicamentos>(qry, commandType: System.Data.CommandType.StoredProcedure);
+            }
+
+            return response;
         }
 
         public async Task<Medicamentos> GetMedicamentoByIdAsync(int id)
         {
             IEnumerable<Medicamentos> response = null;
-            string qry = "spAObtenerMedicamento";
+            string qry = "spAObtenerMedicamentos";
             var parameters = new DynamicParameters();
             parameters.Add("id", id);
 
@@ -77,6 +86,17 @@ namespace Cepdi.Persistence.Repositories
                  response = await conn.ExecuteScalarAsync<int>(qry, parameters, commandType: System.Data.CommandType.StoredProcedure);
             }
             return response > 0;
+        }
+
+        public async Task<bool> DeleteMedicamnetoAsync(int id)
+        {
+            var medicamento = await this.GetMedicamentoByIdAsync(id);
+
+            if (medicamento is null) { return false; }
+
+            medicamento.HABILITADO = false;
+
+            return await this.UpdateMedicamentoAsync(medicamento);
         }
     }
 }

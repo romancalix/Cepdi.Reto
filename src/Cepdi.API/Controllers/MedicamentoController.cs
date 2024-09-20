@@ -1,5 +1,8 @@
 ﻿using Cepdi.Application.UseCases.UseCases.Medicamentos.Commands.CreateCommand;
+using Cepdi.Application.UseCases.UseCases.Medicamentos.Commands.DeleteCommand;
 using Cepdi.Application.UseCases.UseCases.Medicamentos.Commands.UpdateCommand;
+using Cepdi.Application.UseCases.UseCases.Medicamentos.Queries.GetAllQuery;
+using Cepdi.Application.UseCases.UseCases.Medicamentos.Queries.GetById;
 using Cepdi.Application.UseCases.UseCases.Usuarios.Commands.CreateCommand;
 using Cepdi.Application.UseCases.UseCases.Usuarios.Commands.DeleteCommand;
 using Cepdi.Application.UseCases.UseCases.Usuarios.Commands.UpdateCommand;
@@ -37,24 +40,24 @@ namespace Cepdi.API.Controllers
         }
 
         [HttpGet("todos")]
-        public async Task<IActionResult> TodoUsuarios()
+        public async Task<IActionResult> TodoMedicamentos()
         {
-            var response = await this._mediator.Send(new GetAllUsuarioQuery());
+            var response = await this._mediator.Send(new GetAllMedicamentosQuery());
             return Ok(response);
         }
 
 
         [HttpGet("porId")]
-        public async Task<IActionResult> UsuarioPorId(int id)
+        public async Task<IActionResult> MedicamentoPorId(int id)
         {
-            var response = await this._mediator.Send(new GetUsuarioByIdQuery() { id = id });
+            var response = await this._mediator.Send(new GetMedicamentoByIdQuery() { id = id });
             return Ok(response);
         }
 
         [HttpDelete("eliminar")]
-        public async Task<IActionResult> EliminarUsuario(int id)
+        public async Task<IActionResult> EliminarMedicamento(int id)
         {
-            var response = await this._mediator.Send(new DeleteUsuarioCommand() { id = id });
+            var response = await this._mediator.Send(new DeleteMedicamentoCommand() { id = id });
             return Ok(response);
         }
 
