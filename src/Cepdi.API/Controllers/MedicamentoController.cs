@@ -1,4 +1,5 @@
 ﻿using Cepdi.Application.UseCases.UseCases.Medicamentos.Commands.CreateCommand;
+using Cepdi.Application.UseCases.UseCases.Medicamentos.Commands.UpdateCommand;
 using Cepdi.Application.UseCases.UseCases.Usuarios.Commands.CreateCommand;
 using Cepdi.Application.UseCases.UseCases.Usuarios.Commands.DeleteCommand;
 using Cepdi.Application.UseCases.UseCases.Usuarios.Commands.UpdateCommand;
@@ -28,10 +29,10 @@ namespace Cepdi.API.Controllers
         }
 
 
-        [HttpPut("actualiazr")]
-        public async Task<IActionResult> ActualizarUsuario([FromBody] UpdateUsuarioCommand updateUsuarioCommand)
+        [HttpPut("actualizar")]
+        public async Task<IActionResult> ActualizarMedicamento([FromBody] UpdateMedicamentoCommand updateMedicamentoCommand)
         {
-            var response = await this._mediator.Send(updateUsuarioCommand);
+            var response = await this._mediator.Send(updateMedicamentoCommand);
             return Ok(response);
         }
 

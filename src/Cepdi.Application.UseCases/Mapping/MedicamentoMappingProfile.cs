@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cepdi.Application.UseCases.UseCases.Medicamentos.Commands.CreateCommand;
+using Cepdi.Application.DTO;
+using Cepdi.Application.UseCases.UseCases.Medicamentos.Commands.UpdateCommand;
 
 namespace Cepdi.Application.UseCases.Mapping
 {
@@ -16,6 +18,12 @@ namespace Cepdi.Application.UseCases.Mapping
         {
             CreateMap<ENTITIES.Medicamentos, CreateMedicamentoCommand>()
                .ReverseMap();
+
+            CreateMap<ENTITIES.Medicamentos, MedicamentoDTO>()
+               .ReverseMap();
+
+            CreateMap<ENTITIES.Medicamentos, UpdateMedicamentoCommand>()
+             .ReverseMap();
         }
     }
 }

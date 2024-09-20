@@ -74,7 +74,7 @@ namespace Cepdi.Persistence.Repositories
 
             using (var conn = this._context.CreateConnection)
             {
-                response = await conn.ExecuteScalarAsync<int>(qry, parameters, commandType: System.Data.CommandType.StoredProcedure);
+                 response = await conn.ExecuteScalarAsync<int>(qry, parameters, commandType: System.Data.CommandType.StoredProcedure);
             }
             return response > 0;
         }

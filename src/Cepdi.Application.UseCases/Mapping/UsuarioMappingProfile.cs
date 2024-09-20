@@ -9,6 +9,7 @@ using DTO = Cepdi.Application.DTO;
 using Cepdi.Application.UseCases.UseCases.Usuarios.Commands.CreateCommand;
 using Cepdi.Application.UseCases.UseCases.Usuarios.Commands.UpdateCommand;
 using Cepdi.Application.DTO;
+using Cepdi.Application.UseCases.UseCases.Medicamentos.Commands.CreateCommand;
 
 namespace Cepdi.Application.UseCases.Mapping
 {
