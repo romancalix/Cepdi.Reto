@@ -3,6 +3,7 @@ using Cepdi.Application.UseCases.UseCases.Usuarios.Commands.DeleteCommand;
 using Cepdi.Application.UseCases.UseCases.Usuarios.Commands.UpdateCommand;
 using Cepdi.Application.UseCases.UseCases.Usuarios.Queries.GetAllQuery;
 using Cepdi.Application.UseCases.UseCases.Usuarios.Queries.GetById;
+using Cepdi.Application.UseCases.UseCases.Usuarios.Queries.GetByLogin;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -53,6 +54,13 @@ namespace Cepdi.API.Controllers
         public async Task<IActionResult> EliminarUsuario(int id)
         {
             var response = await this._mediator.Send(new DeleteUsuarioCommand() { id = id });
+            return Ok(response);
+        }
+
+        [HttpGet("Login")]
+        public async Task<IActionResult> LoginUsuario(string usuario, string contrasena)
+        {
+            var response = await this._mediator.Send(new GetUsuarioByLoginQuery { usuario = usuario, contrasena = contrasena  });
             return Ok(response);
         }
     }

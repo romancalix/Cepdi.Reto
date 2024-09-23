@@ -1,0 +1,76 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center mt-5">
+    <div class="card text-center">
+        <div class="card-header" id="tltle-element">
+            USUARIO
+        </div>
+        <div class="card-body">
+            <div id="card-body-usaurio">
+                <table id="tabla-reporte-usuarios" class="display" cellspacing="0" width="100%">
+                    <thead class="GridHeader">
+                        <tr>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>FECHA CREACION</th>
+                            <th>USUARIO</th>
+                            <th>ACCIONES</th>
+                            <th>*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>FECHA CREACION</th>
+                            <th>USUARIO</th>
+                            <th>ACCIONES</th>
+                            <th></th>
+                        </tr>
+                        
+                </table>
+
+            </div>
+            <div id="card-body-medicamento">
+                <table id="tabla-reporte-medicamentos" class="display" cellspacing="0" width="100%">
+                    <thead class="GridHeader">
+                        <tr>
+                            <th>ID</th>
+                            <th>MEDICAMENTO</th>
+                            <th>CONCENTRACION</th>
+                            <th>PRECIO</th>
+                            <th>PRESENTACION</th>
+                            <th>ACCIONES</th>
+                            <th>*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>MEDICAMENTO</th>
+                            <th>CONCENTRACION</th>
+                            <th>PRECIO</th>
+                            <th>PRESENTACION</th>
+                            <th>ACCIONES</th>
+                            <th>*</th>
+                        </tr>
+                    </tfoot>
+
+                </table>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            2 days ago
+        </div>
+    </div>
+</div>

@@ -14,7 +14,25 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddInjectionPersistence();
 builder.Services.AddInjectionApplication();
 
+builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+    //builder.WithOrigins("http://localhost:5225")
+    //       .AllowAnyMethod()
+    //       .AllowAnyHeader();
+    //builder.WithOrigins("http://localhost:7058")
+    //       .AllowAnyMethod()
+    //       .AllowAnyHeader();
+}));
+
+//builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+
 var app = builder.Build();
+
+
+app.UseCors("MyPolicy");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
