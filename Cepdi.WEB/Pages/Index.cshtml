@@ -4,10 +4,19 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center mt-5">
-    <div class="card text-center">
-        <div class="card-header" id="tltle-element">
-            USUARIO
+<div class="mt-5">
+
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6" id="tltle-element">USUARIO</div>
+                <div class="col-md-6" style="text-align: end;">
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo usuario
+                        <i class="glyphicon glyphicon-plus"></i></button>
+                </div>
+            </div>
+
+
         </div>
         <div class="card-body">
             <div id="card-body-usaurio">
@@ -34,7 +43,7 @@
                             <th>ACCIONES</th>
                             <th></th>
                         </tr>
-                        
+
                 </table>
 
             </div>
@@ -71,6 +80,42 @@
         </div>
         <div class="card-footer text-muted">
             2 days ago
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="form-usuario">
+                <div class="mb-3">
+                    <label for="txt-nombre-usuario" class="form-label">Nombre</label>
+                    <input type="email" class="form-control" id="txt-nombre-usuario">
+                </div>
+                <div class="mb-3">
+                    <label for="txt-nombreusuario-usuario" class="form-label">Usuario</label>
+                    <input type="email" class="form-control" id="txt-nombreusuario-usuario">
+                </div>
+                <div class="mb-3">
+                    <label for="txt-password-usuario" class="form-label">Contraseña</label>
+                    <input type="email" class="form-control" id="txt-password-usuario">
+                </div>
+                <div class="mb-3">
+                    <label for="txt-acciones-usuario" class="form-label">Acciones</label>
+                    <input type="email" class="form-control" id="txt-acciones-usuario">
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btn-guardar-usuario">Guardar</button>
+            </div>
         </div>
     </div>
 </div>

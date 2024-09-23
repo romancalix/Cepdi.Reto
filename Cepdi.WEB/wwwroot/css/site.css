@@ -37,3 +37,7 @@ body {
 tbody tr td {
   text-align: left !important;
 }
+
+.card-header {
+ left: 50;
+}

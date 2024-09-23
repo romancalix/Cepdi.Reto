@@ -61,7 +61,7 @@ CEPDI.app = (function ($, window, document, undefined) {
 
   var startDatatable = function (idDataTable, columns, apiUrl) { 
 
-    $("#" + idDataTable).DataTable({
+  return   $("#" + idDataTable).DataTable({
       retrieve: true,
       processing: true,
       responsive: true,
@@ -122,12 +122,11 @@ CEPDI.app = (function ($, window, document, undefined) {
   });
   }
 
-  var GetJsonObject = function (action, data, type, functionBack) {
-    console.log(action);
+  var CallApiAjax = function (apiUrl, data, type, functionBack) {
     $.ajax({
-      url: action,
+      url: apiUrl,
       type: type,
-      data: data,
+      data: JSON.stringify(data),
       async: false,
       contentType: "application/json",
       datatype: "JSON",
@@ -138,6 +137,9 @@ CEPDI.app = (function ($, window, document, undefined) {
         alert(
           "Ocurrio un error  generado " + thrownError + " - " + xhr.responseText
         );
+        console.log('ajaxOptions => ',ajaxOptions);
+        console.log('xhr.responseText => ', xhr.responseText);
+        console.log('thrownError => ', thrownError);
         //UnBlockUI();
       },
     });
@@ -238,13 +240,40 @@ CEPDI.app = (function ($, window, document, undefined) {
     });
   };
 
+  
+  var limpiarFormulario = function (formId) {
+    $("div." + formId + " div div input[type='text']").each(function () {
+        $(this).val('');
+    });
+    $("div." + formId + " div div input[type='email']").each(function () {
+        $(this).val('');
+    });
+    $("div." + formId + " div div input[type='tel']").each(function () {
+        $(this).val('');
+    });
+    $("div." + formId + " div div textarea").each(function () {
+        $(this).val('');
+    });
+    $("div." + formId + " div div select").each(function () {
+        $("div." + formId + " div div #" + this.id).val('-1');
+    });
+    $("div." + formId + " div div input[type='checkbox']").each(function () {
+        $(this).prop('checked', false);
+    });
+    $("div." + formId + " div div input[type='radio']").each(function () {
+        var name = $(this).prop("name");
+        $("#" + name + "No").prop('checked', true);
+
+    });
+}
+
   return {
     MessageBox: MessageBox,
     InitDialogModal: InitDialogModal,
     OpenDialogModal: OpenDialogModal,
     HideDialogModal: HideDialogModal,
     InitDataTable: InitDataTable,
-    GetJsonObject: GetJsonObject,
+    CallApiAjax: CallApiAjax,
     urlAppHost: urlAppHost,
     GoToMethod: GoToMethod,
     BlockUI: BlockUI,
@@ -252,6 +281,7 @@ CEPDI.app = (function ($, window, document, undefined) {
     getObjectsInJson: getObjectsInJson,
     isStringNullOrEmpty: isStringNullOrEmpty,
     TextBoxOnlyNumbers: TextBoxOnlyNumbers,
-    startDatatable: startDatatable
+    startDatatable: startDatatable,
+    limpiarFormulario: limpiarFormulario
   };
 })($, window, document, undefined);
