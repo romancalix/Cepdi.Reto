@@ -264,7 +264,22 @@ CEPDI.app = (function ($, window, document, undefined) {
     });
   };
 
+  var QuestionModal = function (title, functionback) {
+    Swal.fire({
+      title: title,
+      showCancelButton: true,
+      confirmButtonText: "Si, eliminar",
+      cancelButtonText: `Cancelar`,
+      icon: "warning",
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      functionback(result.isConfirmed);
+    });
+   
+  };
+
   return {
+    QuestionModal: QuestionModal,
     MessageBox: MessageBox,
     InitDialogModal: InitDialogModal,
     OpenDialogModal: OpenDialogModal,

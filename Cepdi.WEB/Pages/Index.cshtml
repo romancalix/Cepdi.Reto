@@ -12,10 +12,16 @@
                 <div class="col-md-6" id="tltle-element">USUARIO</div>
                 <div class="col-md-6" style="text-align: end;">
                     <button 
-                        id="btn-openModal"
+                        id="btn-openModal-usuario"
                         class="btn btn-success" 
                         data-bs-toggle="modal" 
                         data-bs-target="#exampleModal">Nuevo usuario
+                        <i class="glyphicon glyphicon-plus"></i></button>
+                    <button 
+                        id="btn-openModal-medicamento"
+                        class="btn btn-success" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#exampleModal">Nuevo Medicamento
                         <i class="glyphicon glyphicon-plus"></i></button>
                 </div>
             </div>
@@ -117,9 +123,35 @@
                 </div>
                 
             </div>
+
+            <div class="modal-body" id="form-medicamentos">
+                <div class="mb-3">
+                    <label for="txt-nombre-medicamento" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="txt-nombre-medicamento">
+                    <input type="text" class="form-control" id="txt-id-medicamento" style="display: none;">
+                </div>
+                <div class="mb-3">
+                    <label for="txt-concentracion-medicamento" class="form-label">Usuario</label>
+                    <input type="text" class="form-control" id="txt-concentracion-medicamento">
+                </div>
+                <div class="mb-3">
+                    <label for="txt-precio-medicamento" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="txt-precio-medicamento">
+                </div>
+                <div class="mb-3">
+                    <label for="txt-presentacion-medicamento" class="form-label">Presentación</label>
+                    <input type="text" class="form-control" id="txt-presentacion-medicamento">
+                </div>
+                <div class="mb-3">
+                    <label for="txt-acciones-medicamento" class="form-label">Acciones</label>
+                    <input type="text" class="form-control" id="txt-acciones-medicamento">
+                </div>
+                
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="btn-guardar-usuario">Guardar</button>
+                <button type="button" class="btn btn-primary" id="btn-guardar-usuario">Guardar Usuario</button>
+                <button type="button" class="btn btn-primary" id="btn-guardar-medicamento">Guardar Medicamento</button>
             </div>
         </div>
     </div>
