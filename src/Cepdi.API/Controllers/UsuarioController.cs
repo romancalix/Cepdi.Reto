@@ -28,7 +28,7 @@ namespace Cepdi.API.Controllers
         }
 
 
-        [HttpPut("actualiazr")]
+        [HttpPut("actualizar")]
         public async Task<IActionResult> ActualizarUsuario([FromBody] UpdateUsuarioCommand updateUsuarioCommand)
         {
             var response = await this._mediator.Send(updateUsuarioCommand);

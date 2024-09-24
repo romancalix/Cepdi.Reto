@@ -1,4 +1,5 @@
 ﻿const tablaUsuarios = null;
+const urlBase = 'https://localhost:7058/api';
 
 $(document).ready(function () {
   showHome();
@@ -13,7 +14,7 @@ $(document).ready(function () {
       CEPDI.app.urlAppHost() +
       `api/Usuario/Login?usuario=${user}&contrasena=${pass}`;
 
-    CEPDI.app.GetJsonObject(url, null, "GET", function (response) {
+    CEPDI.app.CallApiAjax(url, null, "GET", function (response) {
       if (response != null) {
         if (response.data !== null) {
           setUsuarioStorage("usuario", response);
@@ -29,35 +30,87 @@ $(document).ready(function () {
     removeUserSession();
     showHome();
   });
+
   $("#item-usuario").click(function () {
     actividadesUsuario();
   });
+
   $("#item-medicamento").click(function () {
     actividadesMedicamento();
   });
+
   $("#nav-item-usuario").click(function () {
     actividadesUsuario();
   });
+
   $("#nav-item-medicamento").click(function () {
     actividadesMedicamento();
   });
+
+  $("#btn-openModal").click(function () { 
+    CEPDI.app.limpiarFormulario("form-usuario");
+    $("#exampleModal").modal('show');
+  });
+
   $("#btn-guardar-usuario").click(function () {
+    var idUsuario = $("#txt-id-usuario").val();
     var usuario = {
-        nombre: $("#txt-nombre-usuario").val(),
-        usuario: $("#txt-nombreusuario-usuario").val(),
-        password: $("#txt-password-usuario").val(),
-        acciones: $("#txt-acciones-usuario").val(),
+      id: CEPDI.app.isStringNullOrEmpty(idUsuario) ? null : idUsuario,
+      nombre: $("#txt-nombre-usuario").val(),
+      usuario: $("#txt-nombreusuario-usuario").val(),
+      password: $("#txt-password-usuario").val(),
+      acciones: $("#txt-acciones-usuario").val(),
     };
 
-    var apiUrl = "https://localhost:7058/api/usuario/agregar";
-    CEPDI.app.CallApiAjax(apiUrl, usuario, "POST", function (response) {
-        alert(response.message);
-        CEPDI.app.HideDialogModal('exampleModal');
-        if (response.isSuccess) { 
-            this.tablaUsuarios.ajax.reload();
-            CEPDI.app.limpiarFormulario("form-usuario");
-        }
+    var tipo = (usuario.id !== null) ? 'PUT' : 'POST';
+    var metodo = (usuario.id !== null) ? 'actualizar' : 'agregar';
+
+    if(usuario.id !== null) usuario.status = true;
+
+    var apiUrl = `${urlBase}/Usuario/${metodo}`;
+
+    CEPDI.app.CallApiAjax(apiUrl, usuario, tipo, function (response) {
+      alert(response.message);
+      console.log('response => ', response);
+      CEPDI.app.HideDialogModal("exampleModal");
+      if (response.isSuccess) {
+        this.tablaUsuarios.ajax.reload();
+        CEPDI.app.limpiarFormulario("form-usuario");
+      } else { 
+        alert(response.message)
+      }
     });
+  });
+
+  $("#tabla-reporte-usuarios tbody").on("click", ".btn-edit", function () {
+    var $row = $(this).closest("tr");
+    var data = $("#tabla-reporte-usuarios").DataTable().row($row).data();
+
+    console.log("data", data);
+    console.log("Record ID is", data["id"]);
+
+    // Add your code here
+    getUserById(data.id, function (response) {
+      $("#txt-id-usuario").val(response.data.id);
+      $("#txt-nombre-usuario").val(response.data.nombre);
+      $("#txt-nombreusuario-usuario").val(response.data.usuario);
+      $("#txt-acciones-usuario").val(response.data.acciones);
+      $("#txt-password-usuario").val(response.data.password);
+      //$("exampleModal").
+      CEPDI.app.OpenDialogModal("exampleModal");
+    });
+
+
+  });
+  $("#tabla-reporte-usuarios tbody").on("click", ".btn-delete", function () {
+    var $row = $(this).closest("tr");
+    var data = $("#tabla-reporte-usuarios").DataTable().row($row).data();
+
+    console.log("data", data);
+    console.log("Record ID is", data["id"]);
+
+    // Add your code here
+   
   });
 });
 
@@ -69,9 +122,9 @@ function actividadesUsuario() {
   var botonesAcciones =
     "<div class='btn-group' role='group' aria-label='Basic example'>";
   botonesAcciones +=
-    "<button type='button' class='btn btn-light' onclick='editarUsuario();'><i class='glyphicon glyphicon-pencil'></i></button>";
+    "<button type='button' class='btn btn-light btn-edit'><i class='glyphicon glyphicon-pencil'></i></button>";
   botonesAcciones +=
-    "<button type='button' class='btn btn-light' onclick='eliminarUsuario();'><i class='glyphicon glyphicon-trash'></i></button>";
+    "<button type='button' class='btn btn-light btn-delete'><i class='glyphicon glyphicon-trash'></i></button>";
   botonesAcciones += "</div>";
 
   this.tablaUsuarios = CEPDI.app.startDatatable(
@@ -84,9 +137,14 @@ function actividadesUsuario() {
       { data: "acciones" },
       { data: "", defaultContent: botonesAcciones },
     ],
-    "https://localhost:7058/api/Usuario/todos"
+    `${urlBase}/Usuario/todos`
   );
 }
+
+function editarUsuario(id) {
+  alert("Editando usuario");
+}
+
 function actividadesMedicamento() {
   var botonesAcciones =
     "<div class='btn-group' role='group' aria-label='Basic example'>";
@@ -148,4 +206,18 @@ function loadUser() {
   //alert(getUsuarioStorage());
   //alert(user.data.nombre)
   $("#li-username").text(user.data.nombre);
+}
+
+function getUserById(id, functionBack) {
+  var url = CEPDI.app.urlAppHost() + `api/Usuario/porId?id=${ id }`;
+  console.log("CLX => ", url);
+  CEPDI.app.CallApiAjax(url, null, "GET", function (response) {
+    if (response != null) {
+      if (response.data !== null) {
+        functionBack(response);
+      } else {
+        CEPDI.app.MessageBox(user.message);
+      }
+    }
+  });
 }

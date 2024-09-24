@@ -59,68 +59,67 @@ CEPDI.app = (function ($, window, document, undefined) {
     });
   };
 
-  var startDatatable = function (idDataTable, columns, apiUrl) { 
-
-  return   $("#" + idDataTable).DataTable({
+  var startDatatable = function (idDataTable, columns, apiUrl) {
+    return $("#" + idDataTable).DataTable({
       retrieve: true,
       processing: true,
       responsive: true,
-      "scrollY": "300px",
-      "scrollX": true,
-      "scrollCollapse": true,
-      "language": {
-          "lengthMenu": "Muestra _MENU_ registros por pagina",
-          "zeroRecords": "No se encontraron registros",
-          "info": "Mostrando pagina _PAGE_ de _PAGES_",
-          "infoEmpty": "No hay registros disponibles",
-          "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-          "processing": "Procesando...",
-          "loadingRecords": "Cargando...",
-          "search": "Buscar:",
-          "paginate": {
-              "first": "Primera",
-              "last": "Ultima",
-              "next": '<i class="fa fa-fw fa-angle-right fa-3">',
-              'previous': '<i class="fa fa-fw fa-angle-left fa-3">'
-          }
+      scrollY: "300px",
+      scrollX: true,
+      scrollCollapse: true,
+      language: {
+        lengthMenu: "Muestra _MENU_ registros por pagina",
+        zeroRecords: "No se encontraron registros",
+        info: "Mostrando pagina _PAGE_ de _PAGES_",
+        infoEmpty: "No hay registros disponibles",
+        infoFiltered: "(filtrado de un total de _MAX_ registros)",
+        processing: "Procesando...",
+        loadingRecords: "Cargando...",
+        search: "Buscar:",
+        paginate: {
+          first: "Primera",
+          last: "Ultima",
+          next: '<i class="fa fa-fw fa-angle-right fa-3">',
+          previous: '<i class="fa fa-fw fa-angle-left fa-3">',
+        },
       },
-      "ajax": {
-          "url": apiUrl,
-          "type": "GET",
-          "datatype": "json"
+      ajax: {
+        url: apiUrl,
+        type: "GET",
+        datatype: "json",
       },
       columns: columns,
       columnDefs: [
         {
           target: 0,
-          visible: false
-        }
+          visible: false,
+        },
       ],
       initComplete: function () {
         this.api()
-            .columns()
-            .every(function () {
-                let column = this;
-                let title = column.footer().textContent;
- 
-                // Create input element
-                let input = document.createElement('input');
-                input.placeholder = title;
-                column.footer().replaceChildren(input);
- 
-                // Event listener for user input
-                input.addEventListener('keyup', () => {
-                    if (column.search() !== this.value) {
-                        column.search(input.value).draw();
-                    }
-                });
+          .columns()
+          .every(function () {
+            let column = this;
+            let title = column.footer().textContent;
+
+            // Create input element
+            let input = document.createElement("input");
+            input.placeholder = title;
+            column.footer().replaceChildren(input);
+
+            // Event listener for user input
+            input.addEventListener("keyup", () => {
+              if (column.search() !== this.value) {
+                column.search(input.value).draw();
+              }
             });
-    },
+          });
+      },
       fixedHeader: {
-        footer: true
-    }
-  });
-  }
+        footer: true,
+      },
+    });
+  };
 
   var CallApiAjax = function (apiUrl, data, type, functionBack) {
     $.ajax({
@@ -137,9 +136,9 @@ CEPDI.app = (function ($, window, document, undefined) {
         alert(
           "Ocurrio un error  generado " + thrownError + " - " + xhr.responseText
         );
-        console.log('ajaxOptions => ',ajaxOptions);
-        console.log('xhr.responseText => ', xhr.responseText);
-        console.log('thrownError => ', thrownError);
+        console.log("ajaxOptions => ", ajaxOptions);
+        console.log("xhr.responseText => ", xhr.responseText);
+        console.log("thrownError => ", thrownError);
         //UnBlockUI();
       },
     });
@@ -169,7 +168,7 @@ CEPDI.app = (function ($, window, document, undefined) {
     url_site = url_site.replace("http", "https");
     url_site = url_site.replace("#", "");
 
-    console.log('url_site => ', url_site);
+    console.log("url_site => ", url_site);
 
     return url_site;
   };
@@ -240,32 +239,30 @@ CEPDI.app = (function ($, window, document, undefined) {
     });
   };
 
-  
   var limpiarFormulario = function (formId) {
     $("div." + formId + " div div input[type='text']").each(function () {
-        $(this).val('');
+      $(this).val("");
     });
     $("div." + formId + " div div input[type='email']").each(function () {
-        $(this).val('');
+      $(this).val("");
     });
     $("div." + formId + " div div input[type='tel']").each(function () {
-        $(this).val('');
+      $(this).val("");
     });
     $("div." + formId + " div div textarea").each(function () {
-        $(this).val('');
+      $(this).val("");
     });
     $("div." + formId + " div div select").each(function () {
-        $("div." + formId + " div div #" + this.id).val('-1');
+      $("div." + formId + " div div #" + this.id).val("-1");
     });
     $("div." + formId + " div div input[type='checkbox']").each(function () {
-        $(this).prop('checked', false);
+      $(this).prop("checked", false);
     });
     $("div." + formId + " div div input[type='radio']").each(function () {
-        var name = $(this).prop("name");
-        $("#" + name + "No").prop('checked', true);
-
+      var name = $(this).prop("name");
+      $("#" + name + "No").prop("checked", true);
     });
-}
+  };
 
   return {
     MessageBox: MessageBox,
@@ -282,6 +279,6 @@ CEPDI.app = (function ($, window, document, undefined) {
     isStringNullOrEmpty: isStringNullOrEmpty,
     TextBoxOnlyNumbers: TextBoxOnlyNumbers,
     startDatatable: startDatatable,
-    limpiarFormulario: limpiarFormulario
+    limpiarFormulario: limpiarFormulario,
   };
 })($, window, document, undefined);
