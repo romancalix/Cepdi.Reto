@@ -1,0 +1,158 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="mt-5">
+
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6" id="tltle-element">USUARIO</div>
+                <div class="col-md-6" style="text-align: end;">
+                    <button 
+                        id="btn-openModal-usuario"
+                        class="btn btn-success" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#exampleModal">Nuevo usuario
+                        <i class="glyphicon glyphicon-plus"></i></button>
+                    <button 
+                        id="btn-openModal-medicamento"
+                        class="btn btn-success" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#exampleModal">Nuevo Medicamento
+                        <i class="glyphicon glyphicon-plus"></i></button>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="card-body">
+            <div id="card-body-usaurio">
+                <table id="tabla-reporte-usuarios" class="display" cellspacing="0" width="100%">
+                    <thead class="GridHeader">
+                        <tr>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>FECHA CREACION</th>
+                            <th>USUARIO</th>
+                            <th>ACCIONES</th>
+                            <th>*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>FECHA CREACION</th>
+                            <th>USUARIO</th>
+                            <th>ACCIONES</th>
+                            <th></th>
+                        </tr>
+
+                </table>
+
+            </div>
+            <div id="card-body-medicamento">
+                <table id="tabla-reporte-medicamentos" class="display" cellspacing="0" width="100%">
+                    <thead class="GridHeader">
+                        <tr>
+                            <th>ID</th>
+                            <th>MEDICAMENTO</th>
+                            <th>CONCENTRACION</th>
+                            <th>PRECIO</th>
+                            <th>PRESENTACION</th>
+                            <th>ACCIONES</th>
+                            <th>*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>MEDICAMENTO</th>
+                            <th>CONCENTRACION</th>
+                            <th>PRECIO</th>
+                            <th>PRESENTACION</th>
+                            <th>ACCIONES</th>
+                            <th>*</th>
+                        </tr>
+                    </tfoot>
+
+                </table>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            2 days ago
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="form-usuario">
+                <div class="mb-3">
+                    <label for="txt-nombre-usuario" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="txt-nombre-usuario">
+                    <input type="text" class="form-control" id="txt-id-usuario" style="display: none;">
+                </div>
+                <div class="mb-3">
+                    <label for="txt-nombreusuario-usuario" class="form-label">Usuario</label>
+                    <input type="text" class="form-control" id="txt-nombreusuario-usuario">
+                </div>
+                <div class="mb-3">
+                    <label for="txt-password-usuario" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="txt-password-usuario">
+                </div>
+                <div class="mb-3">
+                    <label for="txt-acciones-usuario" class="form-label">Acciones</label>
+                    <input type="text" class="form-control" id="txt-acciones-usuario">
+                </div>
+                
+            </div>
+
+            <div class="modal-body" id="form-medicamentos">
+                <div class="mb-3">
+                    <label for="txt-nombre-medicamento" class="form-label">Medicamento</label>
+                    <input type="text" class="form-control" id="txt-nombre-medicamento">
+                    <input type="text" class="form-control" id="txt-id-medicamento" style="display: block;">
+                </div>
+                <div class="mb-3">
+                    <label for="txt-concentracion-medicamento" class="form-label">Concentración</label>
+                    <input type="text" class="form-control" id="txt-concentracion-medicamento">
+                </div>
+                <div class="mb-3">
+                    <label for="txt-precio-medicamento" class="form-label">Precio</label>
+                    <input type="number" class="form-control" id="txt-precio-medicamento">
+                </div>
+                <div class="mb-3">
+                    <label for="txt-presentacion-medicamento" class="form-label">Presentación</label>
+                    <input type="text" class="form-control" id="txt-presentacion-medicamento">
+                </div>
+                <div class="mb-3">
+                    <label for="txt-acciones-medicamento" class="form-label">Acciones</label>
+                    <input type="text" class="form-control" id="txt-acciones-medicamento">
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btn-guardar-usuario">Guardar Usuario</button>
+                <button type="button" class="btn btn-primary" id="btn-guardar-medicamento">Guardar Medicamento</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,6 +10,7 @@ namespace Cepdi.Domain.Entities
     {
         public int IDMEDICAMENTO { get; set; }
         public string? CONCENTRACION { get; set; }
+        public string? NOMBRE { get; set; }
         public int IDFORMAFARMACEUTICA { get; set; }
         public double PRECIO { get; set; }
         public string? PRESENTACION { get; set; }

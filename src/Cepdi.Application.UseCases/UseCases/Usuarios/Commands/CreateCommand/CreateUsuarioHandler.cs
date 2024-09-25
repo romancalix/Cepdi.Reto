@@ -13,7 +13,8 @@ namespace Cepdi.Application.UseCases.UseCases.Usuarios.Commands.CreateCommand
 
         public CreateUsuarioHandler(
             IUsuarioRepository usuarioRepository,
-            IMapper mapper)
+            IMapper mapper
+         )
         {
             this._usuarioRepository = usuarioRepository;
             this._mapper = mapper;

@@ -68,6 +68,22 @@ namespace Cepdi.Persistence.Repositories
             return response.FirstOrDefault();
         }
 
+        public async Task<Usuarios> GetUsuarioByLoginAsync(string usuario, string password)
+        {
+            IEnumerable<Usuarios> response = null;
+            string qry = "spUsuarioLogin";
+            var parameters = new DynamicParameters();
+            parameters.Add("usuario", usuario);
+            parameters.Add("pass", password);
+
+            using (var conn = this._context.CreateConnection)
+            {
+                response = await conn.QueryAsync<Usuarios>(qry, parameters, commandType: System.Data.CommandType.StoredProcedure);
+            }
+
+            return response.FirstOrDefault();
+        }
+
         public async Task<bool> UpdateUsuarioAsync(Usuarios data)
         {
             var response = -1;
@@ -77,7 +93,7 @@ namespace Cepdi.Persistence.Repositories
             parameters.Add("nombre", data.NOMBRE);
             parameters.Add("usuario", data.USUARIO);
             parameters.Add("psw", data.PASSWORD);
-            //parameters.Add("status", data.ESTATUS);
+            parameters.Add("status", data.ESTATUS);
             parameters.Add("acciones", data.ACCIONES);
 
             using (var conn = this._context.CreateConnection)
