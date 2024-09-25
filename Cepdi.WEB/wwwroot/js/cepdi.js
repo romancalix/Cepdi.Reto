@@ -271,14 +271,37 @@ CEPDI.app = (function ($, window, document, undefined) {
       confirmButtonText: "Si, eliminar",
       cancelButtonText: `Cancelar`,
       icon: "warning",
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33"
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       functionback(result.isConfirmed);
     });
-   
   };
 
+  var SuccessAlert = function (title, text) {
+    ShowSweetAlert(title,text, 'success');
+  };
+  var ErrorAlert = function (title, text) {
+    ShowSweetAlert(title,text, 'error');
+  };
+  var WarningAlert = function (title, text) {
+    ShowSweetAlert(title,text, 'warning');
+  };
+
+  //Este metodo no debe estar expuesto
+  var ShowSweetAlert = function (title, text, icon) {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon
+    });
+   }
+
   return {
+    ErrorAlert: ErrorAlert,
+    WarningAlert: WarningAlert,
+    SuccessAlert: SuccessAlert,
     QuestionModal: QuestionModal,
     MessageBox: MessageBox,
     InitDialogModal: InitDialogModal,
